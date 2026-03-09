@@ -1,3 +1,1 @@
 # MyPortfolio
-# MyPortfolio
-# my-portfolio
