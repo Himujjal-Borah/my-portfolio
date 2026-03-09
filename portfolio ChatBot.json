@@ -1,0 +1,210 @@
+{
+  "name": "portfolio ChatBot",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chatbot",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -432,
+        112
+      ],
+      "id": "ed79a36d-905b-401d-a188-1ed946372a46",
+      "name": "Webhook",
+      "webhookId": "e3ab372f-b98c-48a2-a7f3-2cc0dbb53554"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        320
+      ],
+      "id": "28f06e43-1558-4ac2-8964-a3d2d76be962",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YCE5NV5koV9n8iaF",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ { \"reply\": $json.output } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        128,
+        112
+      ],
+      "id": "df72cb65-e0d5-4d3f-bc3f-4091054e8179",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an AI assistant for Himujjal Borah's portfolio website.\n\nAnswer questions about Himujjal Borah based on the information below.\nWhen showing contact details or education details, always format them clearly using bullet points and each point MUST be on a new line.\n\nInformation about Himujjal Borah:\n\nName: Himujjal Borah\nRole: Data Analyst and Full Stack Developer\n\nSkills:\n- n8n\n- Metabase\n- MySQL\n_ JavaScript\n_ HTML\n- CSS\n- Node.js\n- Python\n- Java\n- Bootstrap\n- Git\n- GitHub\n\nEducation:\n- B.Tech Computer Science (2025)\n- Nowgong Polytechnic (2019)\n\nProjects:\n- AI Chatbot\n- Gmail Automation\n- Coding Forum\n- Music Player\n- Chronic Kidney Disease Prediction\n\n\nContact Information:\nPhone: 9101300899\nEmail: himujjalofficial@gmail.com\nGitHub: https://github.com/Himujjal-Borah\nLinkedIn: https://www.linkedin.com/in/himujjal-borah-45710a292/\n\nIf the user asks how to contact Himujjal Borah, respond EXACTLY like this:\n\nYou can contact Himujjal Borah via:\n\n• Phone: 9101300899\n• Email: himujjalofficial@gmail.com\n• LinkedIn: https://www.linkedin.com/in/himujjal-borah-45710a292/\n• GitHub: https://github.com/Himujjal-Borah\n\n\nIf the user asks about education, respond EXACTLY like this:\n\nHimujjal Borah's education details are:\n\n• B.Tech Computer Science (Expected Completion: 2025)\n• Nowgong Polytechnic (2019)\n\nUser Question:\n{{ $json.body.message }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -208,
+        112
+      ],
+      "id": "6c24c779-a03b-4ba2-8bc1-f11d5e21a596",
+      "name": "Main Assistant Agent"
+    },
+    {
+      "parameters": {
+        "content": "## ChatBot",
+        "height": 592,
+        "width": 1024,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "96d96ee3-bff6-48eb-a66f-cc9ead18a439",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "contact-me",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        880,
+        272
+      ],
+      "id": "915b9d2a-f4a8-4f24-839a-701cdec05cb3",
+      "name": "Webhook1",
+      "webhookId": "e3ab372f-b98c-48a2-a7f3-2cc0dbb53554"
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $json.body.email }}",
+        "toEmail": "himujjalofficial@gmail.com",
+        "subject": "={{ $json.body.subject }}",
+        "emailFormat": "text",
+        "text": "=Hey.\nMy name is: {{ $json.body.name }}\n {{ $json.body.message }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1088,
+        272
+      ],
+      "id": "e1fa3ff7-847d-4bcb-8f3d-eb7f88f4d765",
+      "name": "Send email",
+      "webhookId": "e1e1dc70-e83a-41de-9b1c-ce643313879a",
+      "credentials": {
+        "smtp": {
+          "id": "H2EcQ4Rn9Zpgd8Ty",
+          "name": "SMTP account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Contact-Form",
+        "height": 336,
+        "width": 656
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        736,
+        144
+      ],
+      "typeVersion": 1,
+      "id": "b213c400-86c0-45d0-ae1e-76405ad622f3",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Main Assistant Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Main Assistant Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Main Assistant Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Send email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send email": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a9e961a2-844d-41a3-bee6-dbef935a9d96",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "98d69767702960443bc016cc631c79ef990860d69de13a458dbdde00ca637322"
+  },
+  "id": "9yJP1YSAm3gZnFs0",
+  "tags": []
+}
