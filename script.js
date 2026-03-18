@@ -144,8 +144,8 @@ function initializePortfolio() {
     downloadBtn.addEventListener('click', () => {
         // Create a temporary link element
         const link = document.createElement('a');
-        link.href = 'himujjal resume (2).pdf'; // Your CV filename
-        link.download = 'Himujjal_Borah_CV.pdf';
+        link.href = 'HimujjalBorah_Resume.pdf'; // Your CV filename
+        link.download = 'HimujjalBorah_Resume.pdf';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
