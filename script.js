@@ -14,9 +14,9 @@ function initializePortfolio() {
     // Typing Animation
     const typingText = document.querySelector('.typing-text');
     const texts = [
-        'Data Analyst',
+        'Software Developer',
         'AI Automation Developer',
-        'JavaScript Expert',
+        'JavaScript',
         'Data Visualization',
         'Python'
     ];
@@ -144,7 +144,7 @@ function initializePortfolio() {
     downloadBtn.addEventListener('click', () => {
         // Create a temporary link element
         const link = document.createElement('a');
-        link.href = 'HimujjalBorah_Resume (4).pdf'; // Your CV filename
+        link.href = 'HimujjalBorah_Resume.pdf'; // Your CV filename
         link.download = 'HimujjalBorah_Resume.pdf';
         document.body.appendChild(link);
         link.click();
