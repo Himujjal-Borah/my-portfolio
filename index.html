@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // ✅ STEP 1: Replace with your EmailJS Public Key
+        emailjs.init("YOUR_PUBLIC_KEY");
+    </script>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -32,7 +38,6 @@
                 <a href="#projects" class="nav-link">Projects</a>
                 <a href="#experience" class="nav-link">Experience</a>
                 <a href="#contact" class="nav-link">Contact</a>
-                <a href="#askAI" class="nav-link">✨Ask AI</a>
             </div>
             <button class="nav-toggle">
                 <i class="fas fa-bars"></i>
@@ -564,65 +569,7 @@
         </div>
     </section>
 
-    <!-- AI Agent Section -->
-    <section id="askAI" class="chatbot">
-        <div class="container">
-            <h2 class="section-title">Ask <span class="text-gradient">AI About Me</span></h2>
-            <p class="chatbot-subtitle">Ask me anything about Himujjal's skills, projects, experience, or how to contact him!</p>
 
-            <div class="chatbot-wrapper">
-                <!-- Chat Header -->
-                <div class="chat-header">
-                    <div class="chat-header-avatar">
-                        <i class="fas fa-robot"></i>
-                        <span class="status-dot"></span>
-                    </div>
-                    <div class="chat-header-info">
-                        <h3>Himujjal's AI Assistant</h3>
-                        <span class="status-text">Online — Always Ready to Answer</span>
-                    </div>
-                    <button class="chat-clear-btn" id="clearChatBtn" title="Clear conversation">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </div>
-
-                <!-- Messages Area -->
-                <div id="chatMessages" class="chat-messages">
-                    <div class="bot-message chat-bubble">
-                        <div class="bubble-avatar"><i class="fas fa-robot"></i></div>
-                        <div class="bubble-content">
-                            👋 Hi! I'm Himujjal's AI assistant. I can tell you about his skills, projects, experience, and more. What would you like to know?
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Typing Indicator -->
-                <div class="typing-indicator" id="typingIndicator" style="display:none;">
-                    <div class="bubble-avatar"><i class="fas fa-robot"></i></div>
-                    <div class="typing-dots">
-                        <span></span><span></span><span></span>
-                    </div>
-                </div>
-
-                <!-- Suggestion Chips -->
-                <div class="suggestion-chips" id="suggestionChips">
-                    <button class="chip" data-q="What are Himujjal's main skills?">🛠️ Skills</button>
-                    <button class="chip" data-q="Tell me about Himujjal's projects">📁 Projects</button>
-                    <button class="chip" data-q="What is Himujjal's work experience?">💼 Experience</button>
-                    <button class="chip" data-q="What tech stack does Himujjal use?">⚙️ Tech Stack</button>
-                    <button class="chip" data-q="How can I contact Himujjal?">📧 Contact</button>
-                </div>
-
-                <!-- Input Area -->
-                <div class="chat-input">
-                    <input type="text" id="userInput" placeholder="Ask something about Himujjal..." autocomplete="off">
-                    <button id="sendBtn" aria-label="Send message">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
 
@@ -702,10 +649,80 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
+    <!-- Chat Blur Overlay -->
+    <div class="chat-overlay" id="chatOverlay"></div>
+
+    <!-- Floating AI Button -->
+    <button class="chat-fab" id="chatFab" title="Ask AI about Himujjal">
+        <span class="chat-fab-inner" id="chatFabInner">
+            <i class="fas fa-robot"></i>
+            <span class="chat-fab-label">Ask AI</span>
+        </span>
+        <span class="chat-fab-badge" id="chatFabBadge">1</span>
     </button>
+
+    <!-- Floating Chat Popup -->
+    <div class="chat-popup" id="chatPopup">
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <div class="chat-header-avatar">
+                <i class="fas fa-robot"></i>
+                <span class="status-dot"></span>
+            </div>
+            <div class="chat-header-info">
+                <h3>Himujjal's AI Assistant</h3>
+                <span class="status-text">Online — Always Ready to Answer</span>
+            </div>
+            <div class="chat-header-actions">
+                <button class="chat-clear-btn" id="clearChatBtn" title="Clear conversation">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <button class="chat-close-btn" id="chatCloseBtn" title="Close chat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Messages Area -->
+        <div id="chatMessages" class="chat-messages">
+            <div class="bot-message chat-bubble">
+                <div class="bubble-avatar"><i class="fas fa-robot"></i></div>
+                <div class="bubble-content">
+                    👋 Hi! I'm Himujjal's AI assistant. Ask me about his skills, projects, experience, or how to contact him!
+                </div>
+            </div>
+        </div>
+
+        <!-- Typing Indicator -->
+        <div class="typing-indicator" id="typingIndicator" style="display:none;">
+            <div class="bubble-avatar"><i class="fas fa-robot"></i></div>
+            <div class="typing-dots">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Suggestion Chips -->
+        <div class="suggestion-chips" id="suggestionChips">
+            <button class="chip" data-q="Who is Himujjal Borah?">👤 About</button>
+            <button class="chip" data-q="What are Himujjal's main skills?">🛠️ Skills</button>
+            <button class="chip" data-q="Tell me about Himujjal's projects">📁 Projects</button>
+            <button class="chip" data-q="What is Himujjal's work experience?">💼 Experience</button>
+            <button class="chip" data-q="What is Himujjal's educational background?">🎓 Education</button>
+            <button class="chip" data-q="How can I contact Himujjal?">📧 Contact</button>
+            <button class="chip" data-q="Show me Himujjal's GitHub and LinkedIn">🔗 GitHub/LinkedIn</button>
+            <button class="chip" data-q="Is Himujjal available for hire?">🚀 Hire</button>
+            <button class="chip" data-q="What certifications does Himujjal have?">🏆 Certifications</button>
+            <button class="chip" data-q="Hi there!">👋 Hello</button>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Ask something about Himujjal..." autocomplete="off">
+            <button id="sendBtn" aria-label="Send message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>

@@ -204,26 +204,48 @@ function initializePortfolio() {
         observer.observe(el);
     });
 
-    // Back to Top Button
-    const backToTopBtn = document.querySelector('.back-to-top');
-    
+    // Scroll → update active nav
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopBtn.classList.add('visible');
-        } else {
-            backToTopBtn.classList.remove('visible');
-        }
-        
-        // Update active nav link based on scroll position
         updateActiveNavLink();
     });
 
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+    // ── Floating Chat FAB ──
+    const chatFab      = document.getElementById("chatFab");
+    const chatPopup    = document.getElementById("chatPopup");
+    const chatCloseBtn = document.getElementById("chatCloseBtn");
+    const chatFabBadge = document.getElementById("chatFabBadge");
+
+    const chatOverlay = document.getElementById("chatOverlay");
+
+    function openChat() {
+        chatPopup.classList.add("open");
+        chatOverlay.classList.add("open");
+        document.body.style.overflow = "hidden";
+        chatFab.classList.add("is-open");
+        const inner = document.getElementById("chatFabInner");
+        if (inner) inner.innerHTML = '<i class="fas fa-times"></i><span class="chat-fab-label">Close</span>';
+        if (chatFabBadge) chatFabBadge.style.display = "none";
+        setTimeout(() => document.getElementById("userInput").focus(), 300);
+    }
+
+    function closeChat() {
+        chatPopup.classList.remove("open");
+        chatOverlay.classList.remove("open");
+        document.body.style.overflow = "";
+        chatFab.classList.remove("is-open");
+        const inner = document.getElementById("chatFabInner");
+        if (inner) inner.innerHTML = '<i class="fas fa-robot"></i><span class="chat-fab-label">Ask AI</span>';
+    }
+
+    chatFab.addEventListener("click", () => {
+        chatPopup.classList.contains("open") ? closeChat() : openChat();
     });
+
+    if (chatCloseBtn) chatCloseBtn.addEventListener("click", closeChat);
+
+
+
+    chatOverlay.addEventListener("click", closeChat);
 
     /* ================================================
        CONTACT FORM — EmailJS Integration
@@ -422,229 +444,183 @@ window.addEventListener('resize', () => {
 
 
 /* ================================================
-   PORTFOLIO CHATBOT — No API, Pure JavaScript
-   Keyword matching against Himujjal's portfolio data
+   PORTFOLIO CHATBOT — Pure JavaScript, No API
+   Keyword matching using Himujjal's portfolio data
    ================================================ */
 
 const BOT_RESPONSES = [
-
-    // Greetings
     {
-        keywords: ["hello", "hi", "hey", "howdy", "greetings", "sup", "good morning", "good evening", "good afternoon"],
+        keywords: ["hello", "hi", "hey", "howdy", "greetings", "good morning", "good evening", "good afternoon", "sup"],
         responses: [
             "👋 Hi there! I'm Himujjal's portfolio assistant. Ask me anything about his skills, projects, experience, or how to contact him!",
-            "Hello! 😊 Great to meet you. I can tell you all about Himujjal — his work, projects, skills, or anything else on his portfolio!",
+            "Hello! 😊 I can tell you all about Himujjal — his work, projects, skills, or anything else. What would you like to know?",
             "Hey! Welcome to Himujjal's portfolio. What would you like to know about him?"
         ]
     },
-
-    // Who is Himujjal / About
     {
-        keywords: ["who is", "about him", "about himujjal", "tell me about", "introduce", "background", "yourself", "who are you", "himujjal borah"],
+        keywords: ["who is", "about him", "about himujjal", "tell me about", "introduce", "background", "yourself", "himujjal borah", "who are you"],
         responses: [
-            "Himujjal Borah is a passionate Software Developer from Assam, India 🇮🇳. He holds a B.Tech in Computer Science and currently works as a Software Developer at Spectrus Sustainable Solutions Pvt Ltd. He has 15+ projects and 4 internships under his belt, specializing in web development, AI automation, and data tools.",
-            "Himujjal is a driven Software Developer based in Assam, India. He completed his B.Tech in Computer Science and is now working full-time at Spectrus Sustainable Solutions. He loves building efficient solutions using modern web tech, automation tools like n8n, and AI-powered applications."
+            "Himujjal Borah is a passionate Data Analyst and Full Stack Developer from Assam, India 🇮🇳.\n\nHe currently works as a Software Developer at Spectrus Sustainable Solutions Pvt Ltd. With 15+ projects and 4 internships, he specializes in web development, AI automation, and data tools like n8n and Metabase.",
+            "Himujjal is a driven Full Stack Developer and Data Analyst based in Assam, India. He works at Spectrus Sustainable Solutions and loves building efficient solutions using modern web tech and automation tools."
         ]
     },
-
-    // Current Job / Work
     {
-        keywords: ["current job", "current role", "working", "work at", "company", "employer", "spectrus", "job", "position", "designation"],
+        keywords: ["current job", "current role", "working", "work at", "company", "employer", "spectrus", "job", "position", "designation", "where does he work"],
         responses: [
-            "Himujjal is currently working as a Software Developer at Spectrus Sustainable Solutions Pvt Ltd. (April 2026 – Present). Before that, he was an IT Tech Intern at the same company from December 2025 to March 2026.",
-            "He works as a Software Developer at Spectrus Sustainable Solutions Pvt Ltd. since April 2026. He previously completed an IT Tech internship there from December 2025 to March 2026 before being promoted."
+            "Himujjal is currently working as a Software Developer at Spectrus Sustainable Solutions Pvt Ltd. (April 2026 – Present).\n\nBefore that, he served as an IT Tech Intern at the same company from December 2025 to March 2026.",
+            "He works as a Software Developer at Spectrus Sustainable Solutions Pvt Ltd. since April 2026, having been promoted from his IT Tech Intern role there."
         ]
     },
-
-    // Education
     {
-        keywords: ["education", "study", "studied", "college", "university", "degree", "btech", "b.tech", "diploma", "qualification", "academic", "school"],
+        keywords: ["education", "study", "studied", "college", "university", "degree", "btech", "b.tech", "diploma", "qualification", "academic", "school", "barak", "nowgong"],
         responses: [
-            "Himujjal's educational background:\n🎓 B.Tech in Computer Science — Barak Valley Engineering College, Shribhumi (2022–2025)\n🎓 Diploma in Computer Engineering — Nowgong Polytechnic, Nagaon (2019–2022)",
-            "He completed his B.Tech in Computer Science from Barak Valley Engineering College (2022–2025), and before that earned a Diploma in Computer Engineering from Nowgong Polytechnic, Nagaon (2019–2022)."
+            "Himujjal Borah's education details are:\n• B.Tech Computer Science — Barak Valley Engineering College, Shribhumi (2022–2025)\n• Diploma in Computer Engineering — Nowgong Polytechnic, Nagaon (2019–2022)"
         ]
     },
-
-    // Skills — Frontend
     {
-        keywords: ["frontend", "front end", "html", "css", "javascript", "bootstrap", "ui", "interface", "web design"],
+        keywords: ["frontend", "front end", "html", "css", "javascript", "bootstrap", "jquery", "ui", "interface", "web design"],
         responses: [
-            "Himujjal's frontend skills:\n💻 HTML5 — 95%\n🎨 CSS3 — 90%\n⚡ JavaScript — 85%\n📦 Bootstrap — 80%\n\nHe builds clean, responsive, and animated web interfaces!",
-            "On the frontend side, Himujjal is highly skilled in HTML5 (95%), CSS3 (90%), JavaScript (85%), and Bootstrap (80%). He creates beautiful, responsive UIs."
+            "Himujjal's frontend skills:\n💻 HTML — 95%\n🎨 CSS — 90%\n⚡ JavaScript — 85%\n📦 Bootstrap — 80%\n🔧 jQuery\n\nHe builds clean, responsive, and animated web interfaces!"
         ]
     },
-
-    // Skills — Backend
     {
-        keywords: ["backend", "back end", "node", "nodejs", "express", "python", "mysql", "database", "server", "php", "api"],
+        keywords: ["backend", "back end", "node", "nodejs", "express", "python", "mysql", "database", "server", "api", "java"],
         responses: [
-            "Himujjal's backend skills:\n🟢 Node.js — 80%\n🚂 Express.js — 75%\n🐍 Python — 70%\n🗄️ MySQL — 75%\n\nHe builds robust server-side applications and REST APIs.",
-            "For backend development, Himujjal works with Node.js (80%), Express.js (75%), Python (70%), and MySQL (75%). He's comfortable building full-stack applications."
+            "Himujjal's backend skills:\n🟢 Node.js — 80%\n🚂 Express.js — 75%\n🐍 Python — 70%\n🗄️ MySQL — 75%\n☕ Java\n\nHe builds robust server-side applications and REST APIs."
         ]
     },
-
-    // Skills — All / General
     {
-        keywords: ["skill", "skills", "tech stack", "technologies", "tools", "know", "good at", "expertise", "proficient", "languages"],
+        keywords: ["n8n", "automation", "metabase", "data", "workflow", "tools", "git", "github"],
         responses: [
-            "Himujjal's tech stack:\n\nFrontend: HTML5 (95%), CSS3 (90%), JavaScript (85%), Bootstrap (80%)\nBackend: Node.js (80%), Express.js (75%), MySQL (75%), Python (70%)\nTools: Git, GitHub, jQuery, Java, n8n, Metabase\n\nHe's a well-rounded full-stack developer!",
-            "Here's what Himujjal works with:\n🖥️ Frontend — HTML, CSS, JavaScript, Bootstrap\n⚙️ Backend — Node.js, Express.js, Python, MySQL\n🔧 Tools — Git, GitHub, n8n (automation), Metabase (data viz), Java, jQuery"
+            "Himujjal's tools & specialties:\n⚙️ n8n — workflow automation expert\n📊 Metabase — data visualization\n🐙 Git & GitHub — version control\n\nHe's especially strong in automating workflows and building data dashboards!"
         ]
     },
-
-    // Projects — General
     {
-        keywords: ["project", "projects", "built", "created", "made", "portfolio", "work", "developed", "applications", "apps"],
+        keywords: ["skill", "skills", "tech stack", "technologies", "know", "good at", "expertise", "proficient", "languages", "what can he do"],
         responses: [
-            "Himujjal has built 15+ projects! Here are some highlights:\n\n📌 Online Coding Discussion Forum (PHP/MySQL)\n📌 Chronic Kidney Disease Prediction (ML/Python)\n📌 Food Delivery Website (HTML/CSS/JS)\n📌 Automated Gmail Reply (n8n)\n📌 AI ChatBot with RAG (Python/AI)\n📌 Music Player\n📌 Drum Kit\n📌 AI Research & Report Generator (n8n)\n📌 AI Resume Analyzer & Job Matcher (Gemini)\n\nAsk me about any specific project for more details!",
-            "He's worked on 15+ projects ranging from web apps to AI automation. Key ones include an AI Resume Analyzer, a RAG-powered Chatbot, a Gmail automation system using n8n, a Kidney Disease Predictor using ML, and several frontend projects. Want details on any specific one?"
+            "Himujjal's full tech stack:\n\n🖥️ Frontend: HTML (95%), CSS (90%), JavaScript (85%), Bootstrap (80%), jQuery\n⚙️ Backend: Node.js (80%), Express.js (75%), MySQL (75%), Python (70%), Java\n🔧 Tools: n8n, Metabase, Git, GitHub\n\nRole: Data Analyst & Full Stack Developer 🚀"
         ]
     },
-
-    // Project — AI Resume Analyzer
     {
-        keywords: ["resume", "analyzer", "job matcher", "resume analyzer"],
+        keywords: ["project", "projects", "built", "created", "made", "developed", "applications", "apps", "all projects"],
         responses: [
-            "The AI Resume Analyzer & Job Matcher is one of Himujjal's standout projects! 🚀\n\nIt's an AI-powered system that analyzes uploaded resumes and delivers personalized job recommendations directly to the user's inbox.\n\nTech used: n8n, Gemini AI, JavaScript\n🔗 GitHub: https://github.com/Himujjal-Borah/AI-Resume-Analyzer-Job-Matcher"
+            "Himujjal has built 15+ projects! Here are the highlights:\n\n📌 AI ChatBot with RAG (Python, AI)\n📌 Automated Gmail Reply (n8n)\n📌 Online Coding Discussion Forum (PHP, MySQL)\n📌 Music Player (HTML, CSS, JS)\n📌 Chronic Kidney Disease Prediction (ML, Python)\n📌 Food Delivery Website (HTML, CSS, JS)\n📌 Drum Kit (JavaScript)\n📌 AI Research & Report Generator (n8n)\n📌 AI Resume Analyzer & Job Matcher (Gemini AI)\n📌 Portfolio Website (this site!)\n\nAsk me about any specific project!"
         ]
     },
-
-    // Project — Chatbot / RAG
     {
-        keywords: ["chatbot", "rag", "retrieval", "ai chatbot", "chat bot"],
+        keywords: ["resume", "analyzer", "job matcher"],
         responses: [
-            "Himujjal built an AI ChatBot using RAG (Retrieval-Augmented Generation)! 🤖\n\nIt accurately answers specific questions by retrieving relevant data before responding — making it much smarter than a basic chatbot.\n\nTech used: Python, AI/RAG\n🔗 GitHub: https://github.com/Himujjal-Borah/AI-ChatBot-using-n8n"
+            "The AI Resume Analyzer & Job Matcher is one of Himujjal's standout projects! 🚀\n\nIt uses Gemini AI to analyze resumes and send personalized job recommendations via email.\n\nTech: n8n, Gemini AI, JavaScript\n🔗 GitHub: github.com/Himujjal-Borah/AI-Resume-Analyzer-Job-Matcher"
         ]
     },
-
-    // Project — Gmail Automation
     {
-        keywords: ["gmail", "email", "automated", "auto reply", "automation", "n8n"],
+        keywords: ["chatbot", "rag", "retrieval", "ai chatbot"],
         responses: [
-            "Himujjal built an Automated Gmail Reply system using n8n! 📧\n\nIt uses n8n workflow nodes to automatically respond to incoming emails — a great example of his AI automation skills.\n\nHe also built an AI Research & Report Generator that researches a topic, creates a PDF report, and emails it automatically.\n\n🔗 GitHub: https://github.com/Himujjal-Borah/AI-ChatBot-using-n8n"
+            "Himujjal built an AI ChatBot using RAG (Retrieval-Augmented Generation)! 🤖\n\nIt accurately answers specific questions by retrieving relevant data before responding.\n\nTech: Python, AI/RAG\n🔗 GitHub: github.com/Himujjal-Borah/AI-ChatBot-using-n8n"
         ]
     },
-
-    // Project — Music Player
     {
-        keywords: ["music", "music player", "player"],
+        keywords: ["gmail", "email automation", "auto reply", "n8n workflow"],
         responses: [
-            "Himujjal built a responsive Music Player web app! 🎵\n\nFeatures include play/pause controls, track navigation, and dynamic UI updates — all built with pure HTML, CSS, and JavaScript.\n\n🔗 GitHub: https://github.com/Himujjal-Borah/Music-Player"
+            "Himujjal built an Automated Gmail Reply system using n8n! 📧\n\nIt automatically responds to incoming emails using n8n workflow nodes.\n\nHe also built an AI Research & Report Generator that researches a topic, creates a PDF, and emails it!\n\n🔗 GitHub: github.com/Himujjal-Borah"
         ]
     },
-
-    // Project — Drum Kit
+    {
+        keywords: ["music", "music player"],
+        responses: [
+            "Himujjal built a responsive Music Player web app! 🎵\n\nFeatures: play/pause controls, track navigation, and dynamic UI — built with pure HTML, CSS, and JavaScript.\n\n🔗 GitHub: github.com/Himujjal-Borah/Music-Player"
+        ]
+    },
     {
         keywords: ["drum", "drum kit"],
         responses: [
-            "The Drum Kit is a fun interactive project by Himujjal! 🥁\n\nIt lets you play drum sounds using keyboard keys or mouse clicks, with real-time sound playback built using JavaScript.\n\n🔗 GitHub: https://github.com/Himujjal-Borah/Drum-kit"
+            "The Drum Kit is a fun interactive project! 🥁\n\nPlay drum sounds using keyboard keys or mouse clicks, with real-time sound playback built in JavaScript.\n\n🔗 GitHub: github.com/Himujjal-Borah/Drum-kit"
         ]
     },
-
-    // Project — Kidney Disease
     {
         keywords: ["kidney", "disease", "prediction", "machine learning", "ml", "data science"],
         responses: [
-            "Himujjal built a Chronic Kidney Disease Prediction system! 🏥\n\nIt uses machine learning algorithms in Python to detect kidney disease quickly from medical data — a great example of his data science skills.\n\nTech used: Python, Machine Learning, Data Science"
+            "Himujjal built a Chronic Kidney Disease Prediction system! 🏥\n\nUses machine learning in Python to detect kidney disease from medical data — a great showcase of his data science skills.\n\nTech: Python, Machine Learning"
         ]
     },
-
-    // Project — Food Delivery
     {
-        keywords: ["food", "food delivery", "restaurant"],
+        keywords: ["food", "food delivery"],
         responses: [
-            "Himujjal built a Food Delivery Website — a responsive frontend project featuring a clean food ordering interface built with HTML, CSS, and JavaScript.\n\n🔗 GitHub: https://github.com/Himujjal-Borah"
+            "Himujjal built a Food Delivery Website — a responsive frontend project with a clean ordering interface.\n\nTech: HTML, CSS, JavaScript\n🔗 GitHub: github.com/Himujjal-Borah"
         ]
     },
-
-    // Internships / Experience
     {
-        keywords: ["internship", "intern", "experience", "work experience", "previous", "past work", "pis", "elite computers"],
+        keywords: ["internship", "intern", "experience", "work experience", "previous", "past work", "pis", "elite"],
         responses: [
-            "Himujjal has completed 4 internships:\n\n💼 IT Tech Intern — Spectrus Sustainable Solutions (Dec 2025 – Mar 2026)\n💼 Full Web Dev Bootcamp — Udemy (June–Sept 2023)\n💼 Web Development Intern — Pis IT Solutions Pvt Ltd (May 2022) — HTML, CSS, JS, PHP, MySQL\n💼 IT Hardware & Networking Intern — Elite Computers and Communication Pvt Ltd (April 2021)",
-            "He has solid internship experience across software development and IT:\n• Spectrus Sustainable Solutions — IT Tech Intern (2025–2026)\n• Udemy — Full Web Development Bootcamp (2023)\n• Pis IT Solutions — Web Dev Intern using HTML, CSS, JS, PHP, MySQL (2022)\n• Elite Computers — IT Hardware & Networking Intern (2021)"
+            "Himujjal's internship experience:\n\n💼 IT Tech Intern — Spectrus Sustainable Solutions (Dec 2025 – Mar 2026)\n💼 Full Web Dev Bootcamp — Udemy (June–Sept 2023)\n💼 Web Dev Intern — Pis IT Solutions (May 2022) — HTML, CSS, JS, PHP, MySQL\n💼 IT Hardware & Networking Intern — Elite Computers (April 2021)"
         ]
     },
-
-    // Certifications
     {
         keywords: ["certification", "certifications", "certificate", "certified", "course", "udemy"],
         responses: [
-            "Himujjal holds the following certifications:\n\n🏆 Full Web Development Bootcamp 2023 — Udemy\n🏆 Web Technologies — Pis IT Solutions\n\nHe's always upskilling and staying current with the latest technologies!"
+            "Himujjal's certifications:\n\n🏆 Full Web Development Bootcamp 2023 — Udemy\n🏆 Web Technologies — Pis IT Solutions\n\nHe's always upskilling and learning new technologies!"
         ]
     },
-
-    // Contact
     {
-        keywords: ["contact", "reach", "email", "phone", "hire", "hiring", "available", "connect", "message", "touch", "number"],
+        keywords: ["contact", "reach", "phone", "hire", "hiring", "available", "connect", "touch", "number", "how to contact"],
         responses: [
-            "You can reach Himujjal through:\n\n📧 Email: himujjalofficial@gmail.com\n📞 Phone: +91 9101300899\n📍 Location: Assam, India\n\nOr connect with him on:\n🐙 GitHub: github.com/Himujjal-Borah\n💼 LinkedIn: linkedin.com/in/himujjal-borah-45710a292",
-            "Want to get in touch with Himujjal? Here's how:\n\n✉️ himujjalofficial@gmail.com\n📱 +91 9101300899\n\nHe's open to opportunities, collaborations, and freelance projects!"
+            "You can contact Himujjal Borah via:\n• Phone: 9101300899\n• Email: himujjalofficial@gmail.com\n• LinkedIn: linkedin.com/in/himujjal-borah-45710a292\n• GitHub: github.com/Himujjal-Borah"
         ]
     },
-
-    // GitHub / LinkedIn
     {
-        keywords: ["github", "linkedin", "social", "profile", "link", "portfolio link"],
+        keywords: ["email", "mail", "gmail"],
         responses: [
-            "Find Himujjal online:\n\n🐙 GitHub: https://github.com/Himujjal-Borah\n💼 LinkedIn: https://www.linkedin.com/in/himujjal-borah-45710a292/\n\nHis GitHub has all his projects with source code!"
+            "You can email Himujjal at:\n📧 himujjalofficial@gmail.com\n\nHe's open to opportunities, collaborations, and freelance projects!"
         ]
     },
-
-    // Location
+    {
+        keywords: ["github", "linkedin", "social", "profile", "link"],
+        responses: [
+            "Find Himujjal online:\n\n🐙 GitHub: github.com/Himujjal-Borah\n💼 LinkedIn: linkedin.com/in/himujjal-borah-45710a292\n\nHis GitHub has all his project source code!"
+        ]
+    },
     {
         keywords: ["location", "where", "city", "state", "country", "based", "from", "assam", "india"],
         responses: [
             "Himujjal is based in Assam, India 🇮🇳. He's currently working at Spectrus Sustainable Solutions and is open to remote opportunities as well!"
         ]
     },
-
-    // Strengths / Personality
     {
-        keywords: ["strength", "strengths", "personality", "qualities", "trait", "good at", "best", "passionate"],
+        keywords: ["strength", "strengths", "best at", "good at", "qualities", "passionate"],
         responses: [
-            "Himujjal's key strengths:\n\n🚀 Quick Learner — adapts fast to new technologies\n💡 Problem Solver — strong analytical thinking\n🧹 Clean Code — writes maintainable, efficient code\n🤖 AI Enthusiast — experienced with AI tools and automation\n📊 Data-driven — works with data visualization tools like Metabase"
+            "Himujjal's key strengths:\n\n🚀 Quick Learner — adapts fast to new tech\n💡 Problem Solver — strong analytical thinking\n🧹 Clean Code — writes maintainable, efficient code\n🤖 Automation Expert — experienced with n8n workflows\n📊 Data-Driven — Metabase dashboards and data visualization"
         ]
     },
-
-    // Hire / Open to work
     {
-        keywords: ["hire", "hiring", "open to work", "available", "freelance", "opportunity", "job offer", "recruit"],
+        keywords: ["hire", "open to work", "freelance", "opportunity", "job offer", "recruit", "available for"],
         responses: [
-            "Himujjal is open to exciting opportunities! 🎯\n\nYou can reach him at:\n📧 himujjalofficial@gmail.com\n📞 +91 9101300899\n\nHe's skilled in full-stack development, AI automation, and data tools — a great hire for any tech team!"
+            "Himujjal is open to exciting opportunities! 🎯\n\n📧 himujjalofficial@gmail.com\n📞 9101300899\n\nHe's skilled in full-stack development, data analysis, and AI automation — a great hire for any tech team!"
         ]
     },
-
-    // Thanks / Bye
     {
-        keywords: ["thank", "thanks", "bye", "goodbye", "see you", "great", "awesome", "nice", "cool", "helpful"],
+        keywords: ["cv", "resume", "download"],
         responses: [
-            "You're welcome! 😊 Feel free to ask anything else about Himujjal. Hope to see you connect with him soon!",
-            "Glad I could help! 🙌 If you have more questions about Himujjal's work or want to get in touch, feel free to ask anytime.",
-            "Thanks for stopping by! 👋 Don't forget to check out Himujjal's GitHub and reach out if you'd like to collaborate!"
+            "You can download Himujjal's CV using the 'Download CV' button on the home section of this portfolio! 📄\n\nOr contact him at himujjalofficial@gmail.com to request his latest resume."
         ]
     },
-
-    // CV / Resume download
     {
-        keywords: ["cv", "resume", "download", "pdf"],
+        keywords: ["thank", "thanks", "bye", "goodbye", "see you", "great", "awesome", "nice", "cool", "helpful", "good"],
         responses: [
-            "You can download Himujjal's CV using the 'Download CV' button on the home section of this portfolio! 📄\n\nOr contact him directly at himujjalofficial@gmail.com to request his latest resume."
+            "You're welcome! 😊 Feel free to ask anything else about Himujjal!",
+            "Glad I could help! 🙌 Don't forget to check out his GitHub and reach out if you'd like to collaborate!",
+            "Thanks for stopping by! 👋 Hope to see you connect with Himujjal soon!"
         ]
     }
 ];
 
-// Fallback responses when no keyword matches
 const FALLBACK_RESPONSES = [
-    "Hmm, I'm not sure about that specific question. Try asking about Himujjal's skills, projects, experience, education, or how to contact him! 😊",
-    "I didn't quite catch that! I can tell you about Himujjal's skills, projects, internships, education, or contact info — what would you like to know?",
-    "That's a bit outside what I know! Feel free to ask about Himujjal's work, projects, tech stack, or you can reach him directly at himujjalofficial@gmail.com 📧"
+    "Hmm, I'm not sure about that. Try asking about Himujjal's skills, projects, experience, education, or how to contact him! 😊",
+    "I didn't quite catch that! Ask me about his skills, projects, internships, education, or contact info.",
+    "That's a bit outside what I know! You can also reach Himujjal directly at himujjalofficial@gmail.com 📧"
 ];
 
 function getBotResponse(userMessage) {
     const msg = userMessage.toLowerCase().trim();
-
-    // Score each intent by how many keywords match
     let bestMatch = null;
     let bestScore = 0;
 
@@ -652,7 +628,6 @@ function getBotResponse(userMessage) {
         let score = 0;
         for (const keyword of intent.keywords) {
             if (msg.includes(keyword)) {
-                // Longer keyword matches score higher
                 score += keyword.split(" ").length;
             }
         }
@@ -666,8 +641,6 @@ function getBotResponse(userMessage) {
         const pool = bestMatch.responses;
         return pool[Math.floor(Math.random() * pool.length)];
     }
-
-    // Return a random fallback
     return FALLBACK_RESPONSES[Math.floor(Math.random() * FALLBACK_RESPONSES.length)];
 }
 
@@ -675,7 +648,6 @@ function getBotResponse(userMessage) {
 
 function addMessage(text, sender) {
     const chatMessages = document.getElementById("chatMessages");
-
     const wrapper = document.createElement("div");
     wrapper.className = `chat-bubble ${sender === "user" ? "user-message" : "bot-message"}`;
 
@@ -711,16 +683,13 @@ function sendMessage() {
     const message = input.value.trim();
     if (!message) return;
 
-    // Hide suggestion chips after first message
     document.getElementById("suggestionChips").style.display = "none";
-
     addMessage(message, "user");
     input.value = "";
     setInputDisabled(true);
     setTyping(true);
 
-    // Simulate a short typing delay for natural feel
-    const delay = 600 + Math.random() * 600;
+    const delay = 500 + Math.random() * 700;
     setTimeout(() => {
         const reply = getBotResponse(message);
         setTyping(false);
@@ -733,10 +702,10 @@ function sendMessage() {
 /* ---- Event Listeners ---- */
 
 document.addEventListener("DOMContentLoaded", function () {
-    const input = document.getElementById("userInput");
-    const sendBtn = document.getElementById("sendBtn");
+    const input    = document.getElementById("userInput");
+    const sendBtn  = document.getElementById("sendBtn");
     const clearBtn = document.getElementById("clearChatBtn");
-    const chips = document.querySelectorAll(".chip");
+    const chips    = document.querySelectorAll(".chip");
 
     sendBtn.addEventListener("click", sendMessage);
 
