@@ -1602,3 +1602,312 @@ h1, h2, h3, h4 {
         height: 60px;
     }
 }
+
+
+/* ================================
+   GITHUB STATS SECTION
+   ================================ */
+
+.github-stats {
+    padding: 5rem 0;
+    background: var(--secondary);
+}
+
+.github-subtitle,
+.blog-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: -2rem;
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+}
+
+.github-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.github-card-img {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.github-card-img:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.github-card-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.github-streak {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    transition: var(--transition);
+}
+
+.github-streak:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.github-streak img {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.github-link-wrap {
+    text-align: center;
+}
+
+.github-link-wrap .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+/* ================================
+   BLOG SECTION
+   ================================ */
+
+.blog {
+    padding: 5rem 0;
+    background: var(--primary);
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.blog-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+    transform: scaleX(0);
+    transition: var(--transition);
+    transform-origin: left;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+}
+
+.blog-card:hover::before {
+    transform: scaleX(1);
+}
+
+.blog-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.blog-tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.n8n-tag    { background: rgba(6,182,212,0.15); color: var(--accent); border: 1px solid var(--accent); }
+.python-tag { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid #60a5fa; }
+.metabase-tag { background: rgba(168,85,247,0.15); color: #c084fc; border: 1px solid #c084fc; }
+.ai-tag     { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid #4ade80; }
+
+.blog-date {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.blog-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+}
+
+.blog-excerpt {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    flex: 1;
+}
+
+.blog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--card-border);
+}
+
+.blog-read-time {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.blog-read-btn {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.blog-read-btn:hover {
+    color: var(--accent-light);
+    gap: 0.5rem;
+}
+
+/* Visitor Counter */
+.visitor-counter {
+    margin-bottom: 1rem;
+}
+
+.visitor-counter img {
+    height: 28px;
+    border-radius: 6px;
+}
+
+/* ================================
+   PROJECT MODAL
+   ================================ */
+.project-card { cursor: pointer; position: relative; overflow: hidden; }
+.project-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+.project-icon { width: 42px; height: 42px; border-radius: 12px; background: linear-gradient(135deg, var(--accent-dark), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; }
+.project-card h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--text); }
+.project-hover-hint { font-size: 0.75rem; color: var(--accent); opacity: 0; margin-top: 0.75rem; transition: var(--transition); display: flex; align-items: center; gap: 0.4rem; }
+.project-card:hover .project-hover-hint { opacity: 1; }
+.project-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+
+.project-modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px); z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+    padding: 1rem;
+}
+.project-modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.project-modal {
+    background: var(--secondary); border: 1px solid var(--card-border);
+    border-radius: 24px; padding: 2rem; max-width: 560px; width: 100%;
+    position: relative; transform: scale(0.88) translateY(20px);
+    transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1);
+    max-height: 90vh; overflow-y: auto;
+}
+.project-modal-overlay.open .project-modal { transform: scale(1) translateY(0); }
+
+.modal-close-btn {
+    position: absolute; top: 1rem; right: 1rem;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: none;
+    color: var(--text); cursor: pointer; font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition);
+}
+.modal-close-btn:hover { background: rgba(255,255,255,0.2); }
+
+.modal-icon-wrap { display: flex; justify-content: center; margin-bottom: 1rem; }
+.modal-icon { width: 64px; height: 64px; border-radius: 18px; background: linear-gradient(135deg, var(--accent-dark), var(--accent)); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; }
+.modal-badge { text-align: center; margin-bottom: 0.75rem; }
+.modal-badge span { background: rgba(6,182,212,0.15); color: var(--accent); border: 1px solid var(--accent); padding: 0.25rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+.modal-title { text-align: center; font-size: 1.3rem; color: var(--text); margin-bottom: 0.75rem; }
+.modal-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; text-align: center; margin-bottom: 1.25rem; }
+.modal-section-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 0.5rem; }
+.modal-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+.modal-tech span { background: rgba(6,182,212,0.1); color: var(--accent-light); border: 1px solid var(--card-border); padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.82rem; }
+.modal-features { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+.modal-features li { color: var(--text-muted); font-size: 0.88rem; padding: 0.35rem 0; display: flex; gap: 0.6rem; align-items: flex-start; }
+.modal-features li::before { content: "✓"; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.modal-actions { display: flex; gap: 0.75rem; }
+.modal-actions a { flex: 1; padding: 0.65rem; border-radius: 10px; text-align: center; font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: var(--transition); display: flex; align-items: center; justify-content: center; gap: 0.4rem; }
+.modal-btn-github { background: rgba(255,255,255,0.07); color: var(--text); border: 1px solid var(--card-border); }
+.modal-btn-github:hover { background: rgba(255,255,255,0.15); }
+.modal-btn-live { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: white; border: none; }
+.modal-btn-live:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* ================================
+   WHATSAPP FAB
+   ================================ */
+.whatsapp-fab {
+    position: fixed; bottom: 130px; right: 34px;
+    width: 52px; height: 52px; border-radius: 16px;
+    background: #25d366; color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; z-index: 999; text-decoration: none;
+    box-shadow: 0 4px 18px rgba(37,211,102,0.5);
+    transition: all 0.3s ease;
+    animation: wa-pulse 2.5s ease-in-out infinite;
+}
+@keyframes wa-pulse {
+    0%,100% { box-shadow: 0 4px 18px rgba(37,211,102,0.5), 0 0 0 0 rgba(37,211,102,0.3); }
+    50%      { box-shadow: 0 4px 18px rgba(37,211,102,0.6), 0 0 0 10px rgba(37,211,102,0); }
+}
+.whatsapp-fab:hover { transform: translateY(-3px) scale(1.08); animation: none; box-shadow: 0 8px 25px rgba(37,211,102,0.65); }
+.whatsapp-tooltip {
+    position: absolute; right: 62px; background: #25d366;
+    color: white; padding: 0.35rem 0.75rem; border-radius: 8px;
+    font-size: 0.78rem; font-weight: 600; white-space: nowrap;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.whatsapp-tooltip::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-right: none; border-left-color: #25d366; }
+.whatsapp-fab:hover .whatsapp-tooltip { opacity: 1; }
+
+/* Visitor counter */
+.visitor-counter { margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 0.4rem; }
+.visitor-counter i { color: var(--accent); }

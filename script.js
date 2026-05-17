@@ -221,9 +221,7 @@ function initializePortfolio() {
         chatPopup.classList.add("open");
         chatOverlay.classList.add("open");
         document.body.style.overflow = "hidden";
-        chatFab.classList.add("is-open");
-        const inner = document.getElementById("chatFabInner");
-        if (inner) inner.innerHTML = '<i class="fas fa-times"></i><span class="chat-fab-label">Close</span>';
+        chatFab.style.display = "none";
         if (chatFabBadge) chatFabBadge.style.display = "none";
         setTimeout(() => document.getElementById("userInput").focus(), 300);
     }
@@ -232,7 +230,7 @@ function initializePortfolio() {
         chatPopup.classList.remove("open");
         chatOverlay.classList.remove("open");
         document.body.style.overflow = "";
-        chatFab.classList.remove("is-open");
+        chatFab.style.display = "flex";
         const inner = document.getElementById("chatFabInner");
         if (inner) inner.innerHTML = '<i class="fas fa-robot"></i><span class="chat-fab-label">Ask AI</span>';
     }
@@ -735,3 +733,123 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+/* ================================================
+   PARTICLES.JS CONFIG — Hero Background
+   ================================================ */
+document.addEventListener("DOMContentLoaded", function () {
+    if (typeof particlesJS !== "undefined" && document.getElementById("particles-js")) {
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 900 } },
+                color: { value: "#06b6d4" },
+                shape: { type: "circle" },
+                opacity: { value: 0.35, random: true, anim: { enable: true, speed: 0.8, opacity_min: 0.1 } },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 140, color: "#06b6d4", opacity: 0.2, width: 1 },
+                move: { enable: true, speed: 1.8, direction: "none", random: true, straight: false, out_mode: "out", bounce: false }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" }, resize: true },
+                modes: { grab: { distance: 160, line_linked: { opacity: 0.5 } }, push: { particles_nb: 3 } }
+            },
+            retina_detect: true
+        });
+    }
+});
+
+/* ================================================
+   PROJECT DETAIL MODALS
+   ================================================ */
+const PROJECTS = [
+    {
+        icon: "fas fa-comments", badge: "PHP/MySQL", title: "Online Coding Discussion Forum",
+        desc: "A full-stack PHP and MySQL web application where users can register accounts, share ideas, post questions, and discuss various coding topics in a community forum.",
+        tech: ["PHP", "MySQL", "HTML5", "CSS3", "JavaScript"],
+        features: ["User registration and login system", "Create, edit, and delete discussion posts", "Comment and reply functionality", "Category-based topic filtering", "Responsive design for all devices"],
+        github: "https://github.com/Himujjal-Borah", live: "#"
+    },
+    {
+        icon: "fas fa-heartbeat", badge: "Machine Learning", title: "Chronic Kidney Disease Prediction",
+        desc: "A machine learning project that uses predictive algorithms to detect chronic kidney disease from patient data. Built with Python and trained on medical datasets.",
+        tech: ["Python", "Scikit-learn", "Pandas", "NumPy", "Data Science"],
+        features: ["Preprocessing and cleaning medical datasets", "Feature selection and correlation analysis", "Multiple ML model comparison", "Accuracy metrics and evaluation reports", "Early disease detection capability"],
+        github: "https://github.com/Himujjal-Borah", live: "#"
+    },
+    {
+        icon: "fas fa-utensils", badge: "Frontend", title: "Food Delivery Website",
+        desc: "A fully responsive food delivery frontend built with HTML, CSS, and JavaScript. Features a modern UI with food categories, cart interaction, and smooth animations.",
+        tech: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+        features: ["Responsive layout for mobile and desktop", "Food category browsing", "Interactive cart UI", "Smooth CSS animations", "Clean modern design"],
+        github: "https://github.com/Himujjal-Borah", live: "#"
+    },
+    {
+        icon: "fas fa-envelope-open-text", badge: "Automation", title: "Automated Gmail Reply",
+        desc: "An intelligent email automation system built with n8n that monitors your Gmail inbox and automatically sends smart replies based on predefined rules and AI logic.",
+        tech: ["n8n", "Gmail API", "JavaScript", "Automation", "Webhooks"],
+        features: ["Auto-detect incoming emails by keyword or sender", "AI-generated smart reply content", "Custom reply templates", "Trigger-based workflow execution", "Email logging and tracking"],
+        github: "https://github.com/Himujjal-Borah/AI-ChatBot-using-n8n", live: "#"
+    },
+    {
+        icon: "fas fa-robot", badge: "AI/ML", title: "AI ChatBot with RAG",
+        desc: "An intelligent chatbot powered by Retrieval-Augmented Generation (RAG). It retrieves context from a knowledge base before answering, making responses highly accurate.",
+        tech: ["Python", "RAG", "LLM", "Vector DB", "AI"],
+        features: ["Document ingestion and vector embedding", "Semantic search for context retrieval", "LLM-powered answer generation", "Conversation memory", "Accurate domain-specific responses"],
+        github: "https://github.com/Himujjal-Borah/AI-ChatBot-using-n8n", live: "#"
+    },
+    {
+        icon: "fas fa-music", badge: "Frontend", title: "Music Player",
+        desc: "A responsive music player web application with a sleek UI. Features full playback controls, dynamic track info updates, and smooth user experience.",
+        tech: ["HTML5", "CSS3", "JavaScript", "Web Audio API"],
+        features: ["Play, pause, next, previous controls", "Dynamic track title and artist display", "Progress bar with seek functionality", "Volume control", "Responsive and animated UI"],
+        github: "https://github.com/Himujjal-Borah/Music-Player", live: "#"
+    },
+    {
+        icon: "fas fa-drum", badge: "Interactive", title: "Drum Kit",
+        desc: "An interactive browser-based drum kit that lets you play drum sounds using keyboard keys or mouse clicks. Built entirely with vanilla JavaScript.",
+        tech: ["HTML5", "CSS3", "JavaScript", "Web Audio API"],
+        features: ["9 drum pad sounds mapped to keyboard keys", "Mouse click support for all pads", "Visual feedback on key press", "Smooth animations on hit", "Zero dependencies — pure vanilla JS"],
+        github: "https://github.com/Himujjal-Borah/Drum-kit", live: "#"
+    },
+    {
+        icon: "fas fa-file-alt", badge: "Automation", title: "AI Research & Report Generator",
+        desc: "An advanced n8n workflow that takes a user-submitted research topic, uses AI to research it thoroughly, generates a formatted PDF report, and emails the insights automatically.",
+        tech: ["n8n", "AI/LLM", "PDF Generation", "Gmail API", "Webhooks"],
+        features: ["Topic intake via webhook trigger", "AI-powered web research and summarization", "Automatic PDF report formatting", "Email delivery with attachment", "End-to-end automation — zero manual steps"],
+        github: "https://github.com/Himujjal-Borah/AI-Research-and-Report-generatort", live: "#"
+    },
+    {
+        icon: "fas fa-briefcase", badge: "AI/Automation", title: "AI Resume Analyzer & Job Matcher",
+        desc: "An AI-powered system that accepts uploaded resumes, analyzes skills and experience using Gemini AI, and automatically sends personalized job recommendations directly to the candidate's inbox.",
+        tech: ["n8n", "Gemini AI", "JavaScript", "Gmail API", "PDF Parsing"],
+        features: ["Resume PDF upload and text extraction", "AI skill and experience analysis", "Job matching algorithm using Gemini", "Personalized recommendation email", "Fully automated end-to-end pipeline"],
+        github: "https://github.com/Himujjal-Borah/AI-Resume-Analyzer-Job-Matcher", live: "#"
+    }
+];
+
+function openModal(idx) {
+    const p = PROJECTS[idx];
+    document.getElementById("modalIcon").innerHTML = '<i class="' + p.icon + '"></i>';
+    document.getElementById("modalBadge").innerHTML = '<span>' + p.badge + '</span>';
+    document.getElementById("modalTitle").textContent = p.title;
+    document.getElementById("modalDesc").textContent = p.desc;
+    document.getElementById("modalTech").innerHTML = p.tech.map(t => '<span>' + t + '</span>').join('');
+    document.getElementById("modalFeatures").innerHTML = p.features.map(f => '<li>' + f + '</li>').join('');
+    document.getElementById("modalActions").innerHTML =
+        '<a href="' + p.github + '" target="_blank" class="modal-btn-github"><i class="fab fa-github"></i> View Code</a>' +
+        (p.live !== '#' ? '<a href="' + p.live + '" target="_blank" class="modal-btn-live"><i class="fas fa-external-link-alt"></i> Live Demo</a>' : '');
+    document.getElementById("projectModalOverlay").classList.add("open");
+    document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+    document.getElementById("projectModalOverlay").classList.remove("open");
+    document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") closeModal();
+});
+
