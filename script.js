@@ -217,11 +217,14 @@ function initializePortfolio() {
 
     const chatOverlay = document.getElementById("chatOverlay");
 
+    const waFab = document.querySelector(".whatsapp-fab");
+
     function openChat() {
         chatPopup.classList.add("open");
         chatOverlay.classList.add("open");
         document.body.style.overflow = "hidden";
         chatFab.style.display = "none";
+        if (waFab) waFab.classList.add("hidden");
         if (chatFabBadge) chatFabBadge.style.display = "none";
         setTimeout(() => document.getElementById("userInput").focus(), 300);
     }
@@ -231,6 +234,7 @@ function initializePortfolio() {
         chatOverlay.classList.remove("open");
         document.body.style.overflow = "";
         chatFab.style.display = "flex";
+        if (waFab) waFab.classList.remove("hidden");
         const inner = document.getElementById("chatFabInner");
         if (inner) inner.innerHTML = '<i class="fas fa-robot"></i><span class="chat-fab-label">Ask AI</span>';
     }
@@ -853,3 +857,211 @@ document.addEventListener("keydown", function(e) {
     if (e.key === "Escape") closeModal();
 });
 
+/* ================================================
+   VISITOR COUNTER — countapi.xyz
+   ================================================ */
+// document.addEventListener("DOMContentLoaded", function () {
+//     const el = document.getElementById("visitorCount");
+//     if (!el) return;
+//     fetch("https://api.countapi.xyz/hit/himujjal-portfolio.netlify.app/visits")
+//         .then(r => r.json())
+//         .then(d => { el.textContent = d.value.toLocaleString(); })
+//         .catch(() => {
+//             el.textContent = "1,000+";
+//         });
+// });
+
+/* ================================================
+   LIVE CLOCK & AVAILABILITY BADGE — IST
+   ================================================ */
+
+function updateClock() {
+    const now = new Date();
+    const ist = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+
+    const h = ist.getHours();
+    const m = ist.getMinutes().toString().padStart(2, "0");
+    const s = ist.getSeconds().toString().padStart(2, "0");
+    const ampm = h >= 12 ? "PM" : "AM";
+    const h12 = ((h % 12) || 12).toString().padStart(2, "0");
+
+    const clockEl = document.getElementById("liveClock");
+    if (clockEl) clockEl.textContent = h12 + ":" + m + ":" + s + " " + ampm;
+
+    const badge = document.getElementById("availBadge");
+    const dot   = document.getElementById("availDot");
+    const text  = document.getElementById("availText");
+
+    if (badge && text) {
+        const isAvailable = h >= 9 && h < 21;
+        badge.className = "availability-badge " + (isAvailable ? "available" : "away");
+        text.textContent = isAvailable ? "Available for work" : "Away — back at 9 AM IST";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    updateClock();
+    setInterval(updateClock, 1000);
+});
+
+/* ================================================
+   EASTER EGG — SNAKE GAME
+   Trigger: type "himujjal" anywhere on the page
+   ================================================ */
+
+(function () {
+    const SECRET = "himujjal";
+    let typed = "";
+
+    document.addEventListener("keydown", function (e) {
+        typed += e.key.toLowerCase();
+        if (typed.length > SECRET.length) typed = typed.slice(-SECRET.length);
+        if (typed === SECRET) {
+            openEgg();
+            typed = "";
+        }
+    });
+})();
+
+function openEgg() {
+    document.getElementById("eggOverlay").classList.add("open");
+    document.body.style.overflow = "hidden";
+    startSnake();
+}
+
+function closeEgg() {
+    document.getElementById("eggOverlay").classList.remove("open");
+    document.body.style.overflow = "";
+    stopSnake();
+}
+
+// ── Snake Game Engine ──
+const GRID = 20;
+let snakeLoop = null;
+let snake = [], dir = {x:1,y:0}, nextDir = {x:1,y:0}, food = {}, score = 0, best = 0, running = false;
+
+function startSnake() {
+    const canvas = document.getElementById("snakeCanvas");
+    if (!canvas) return;
+    const cols = Math.floor(canvas.width / GRID);
+    const rows = Math.floor(canvas.height / GRID);
+
+    snake = [{x: Math.floor(cols/2), y: Math.floor(rows/2)}];
+    dir = {x:1, y:0}; nextDir = {x:1, y:0};
+    score = 0;
+    document.getElementById("snakeScore").textContent = 0;
+    document.getElementById("snakeRestart").textContent = "↺ Restart";
+    placeFood(cols, rows);
+    running = true;
+    if (snakeLoop) clearInterval(snakeLoop);
+    snakeLoop = setInterval(() => gameStep(cols, rows), 140);
+    document.getElementById("eggHint").textContent = "🎮 Arrow keys or WASD to move. Eat the cyan dots!";
+}
+
+function stopSnake() {
+    if (snakeLoop) clearInterval(snakeLoop);
+    snakeLoop = null;
+    running = false;
+}
+
+function placeFood(cols, rows) {
+    do {
+        food = {x: Math.floor(Math.random() * cols), y: Math.floor(Math.random() * rows)};
+    } while (snake.some(s => s.x === food.x && s.y === food.y));
+}
+
+function gameStep(cols, rows) {
+    dir = {...nextDir};
+    const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+
+    // Wall collision
+    if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= rows ||
+        snake.some(s => s.x === head.x && s.y === head.y)) {
+        gameOver();
+        return;
+    }
+
+    snake.unshift(head);
+    if (head.x === food.x && head.y === food.y) {
+        score += 10;
+        document.getElementById("snakeScore").textContent = score;
+        if (score > best) {
+            best = score;
+            document.getElementById("snakeBest").textContent = best;
+        }
+        placeFood(cols, rows);
+    } else {
+        snake.pop();
+    }
+    drawSnake();
+}
+
+function gameOver() {
+    stopSnake();
+    const canvas = document.getElementById("snakeCanvas");
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "rgba(0,0,0,0.6)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ef4444";
+    ctx.font = "bold 28px monospace";
+    ctx.textAlign = "center";
+    ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2 - 14);
+    ctx.fillStyle = "#06b6d4";
+    ctx.font = "16px monospace";
+    ctx.fillText("Score: " + score + "  |  Press ↺ to restart", canvas.width/2, canvas.height/2 + 18);
+    document.getElementById("eggHint").textContent = "💀 Game over! Score: " + score;
+}
+
+function drawSnake() {
+    const canvas = document.getElementById("snakeCanvas");
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#010409";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Grid dots
+    ctx.fillStyle = "rgba(6,182,212,0.06)";
+    for (let x = 0; x < canvas.width; x += GRID)
+        for (let y = 0; y < canvas.height; y += GRID)
+            ctx.fillRect(x+9, y+9, 2, 2);
+
+    // Food
+    ctx.fillStyle = "#06b6d4";
+    ctx.shadowColor = "#06b6d4";
+    ctx.shadowBlur = 12;
+    ctx.beginPath();
+    ctx.arc(food.x * GRID + GRID/2, food.y * GRID + GRID/2, GRID/2 - 3, 0, Math.PI*2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    // Snake body
+    snake.forEach((seg, i) => {
+        const alpha = 1 - (i / snake.length) * 0.5;
+        ctx.fillStyle = i === 0 ? "#06b6d4" : `rgba(8,145,178,${alpha})`;
+        if (i === 0) {
+            ctx.shadowColor = "#06b6d4";
+            ctx.shadowBlur = 8;
+        } else {
+            ctx.shadowBlur = 0;
+        }
+        ctx.beginPath();
+        ctx.roundRect(seg.x * GRID + 2, seg.y * GRID + 2, GRID - 4, GRID - 4, 4);
+        ctx.fill();
+    });
+    ctx.shadowBlur = 0;
+}
+
+// Controls — arrow keys + WASD
+document.addEventListener("keydown", function (e) {
+    if (!running) return;
+    const map = {
+        ArrowUp:    {x:0,y:-1}, w: {x:0,y:-1},
+        ArrowDown:  {x:0,y:1},  s: {x:0,y:1},
+        ArrowLeft:  {x:-1,y:0}, a: {x:-1,y:0},
+        ArrowRight: {x:1,y:0},  d: {x:1,y:0}
+    };
+    const newDir = map[e.key] || map[e.key.toLowerCase()];
+    if (!newDir) return;
+    if (newDir.x === -dir.x && newDir.y === -dir.y) return;
+    nextDir = newDir;
+    if (["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.key)) e.preventDefault();
+});

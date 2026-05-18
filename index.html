@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Himujjal Borah | Software Developer</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Mobile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -32,17 +33,17 @@
         <div class="nav-container">
             <div class="nav-logo">HIMUJJAL BORAH</div>
             <div class="nav-menu">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#home" class="nav-link active" >Home</a>
+                <a href="#about" class="nav-link" >About</a>
+                <a href="#skills" class="nav-link" >Skills</a>
+                <a href="#projects" class="nav-link" >Projects</a>
+                <a href="#experience" class="nav-link" >Experience</a>
+                <a href="#contact" class="nav-link" >Contact</a>
             </div>
             <button class="nav-toggle">
                 <i class="fas fa-bars"></i>
             </button>
-            <button class="theme-toggle">
+<button class="theme-toggle">
                 <i class="fas fa-moon"></i>
             </button>
         </div>
@@ -62,9 +63,23 @@
                 <p class="hero-description animate__animated animate__fadeIn">
                     Working with data, automation, and modern web technologies to build efficient solutions.
                 </p>
+
+                <!-- Live Clock & Availability Badge -->
+                <div class="live-badge-row">
+                    <div class="availability-badge" id="availBadge">
+                        <span class="avail-dot" id="availDot"></span>
+                        <span id="availText">Available</span>
+                    </div>
+                    <div class="live-clock">
+                        <i class="fas fa-clock"></i>
+                        <span id="liveClock">--:-- --</span>
+                        <span class="clock-tz">IST</span>
+                    </div>
+                </div>
+
                 <div class="hero-buttons animate__animated animate__fadeIn">
-                    <a href="#projects" class="btn-primary">View My Work</a>
-                    <a href="#contact" class="btn-secondary">Contact Me</a>
+                    <a href="#projects" class="btn-primary" >View My Work</a>
+                    <a href="#contact" class="btn-secondary" >Contact Me</a>
                     <button class="btn-download-cv">
                         <i class="fas fa-download"></i> Download CV
                     </button>
@@ -90,11 +105,11 @@
                         <div class="profile-stats">
                             <div class="stat">
                                 <span class="stat-number">15+</span>
-                                <span class="stat-label">Projects</span>
+                                <span class="stat-label" >Projects</span>
                             </div>
                             <div class="stat">
                                 <span class="stat-number">4</span>
-                                <span class="stat-label">Internships</span>
+                                <span class="stat-label" >Internships</span>
                             </div>
                         </div>
                     </div>
@@ -140,18 +155,18 @@
                 <div class="about-cards">
                     <div class="card animate-card">
                         <i class="fas fa-rocket"></i>
-                        <h3>Quick Learner</h3>
-                        <p>Adapt quickly to new technologies and frameworks</p>
+                        <h3 >Quick Learner</h3>
+                        <p >Adapt quickly to new technologies and frameworks</p>
                     </div>
                     <div class="card animate-card">
                         <i class="fas fa-lightbulb"></i>
-                        <h3>Problem Solver</h3>
-                        <p>Strong analytical and problem-solving skills</p>
+                        <h3 >Problem Solver</h3>
+                        <p >Strong analytical and problem-solving skills</p>
                     </div>
                     <div class="card animate-card">
                         <i class="fas fa-code"></i>
-                        <h3>Clean Code</h3>
-                        <p>Write maintainable and efficient code</p>
+                        <h3 >Clean Code</h3>
+                        <p >Write maintainable and efficient code</p>
                     </div>
                 </div>
             </div>
@@ -644,7 +659,7 @@
                     <a href="#projects">Projects</a>
                     <a href="#contact">Contact</a>
                 </div>
-                
+                <div class="visitor-counter"><i class="fas fa-eye"></i> <span id="visitorCount">...</span> Visitors</div>
                 <p class="footer-copyright">© 2025 Himujjal Borah. All rights reserved.</p>
             </div>
         </div>
@@ -733,6 +748,24 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Easter Egg Snake Game -->
+    <div class="egg-overlay" id="eggOverlay">
+        <div class="egg-box">
+            <div class="egg-header">
+                <div class="egg-dots"><span></span><span></span><span></span></div>
+                <span class="egg-title">himujjal@portfolio:~$ play snake</span>
+                <button class="egg-close" onclick="closeEgg()">✕</button>
+            </div>
+            <div class="egg-hint" id="eggHint">🎮 You found the easter egg! Use arrow keys to play.</div>
+            <canvas id="snakeCanvas" width="400" height="320"></canvas>
+            <div class="egg-score-row">
+                <span>Score: <strong id="snakeScore">0</strong></span>
+                <span>Best: <strong id="snakeBest">0</strong></span>
+                <button class="egg-restart" id="snakeRestart" onclick="startSnake()">▶ Start</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

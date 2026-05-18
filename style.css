@@ -1601,6 +1601,19 @@ h1, h2, h3, h4 {
         width: 60px;
         height: 60px;
     }
+
+    .whatsapp-fab {
+        right: 16px;
+        bottom: 94px;
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        font-size: 1.3rem;
+    }
+
+    .whatsapp-tooltip {
+        display: none;
+    }
 }
 
 
@@ -1885,7 +1898,7 @@ h1, h2, h3, h4 {
    WHATSAPP FAB
    ================================ */
 .whatsapp-fab {
-    position: fixed; bottom: 130px; right: 34px;
+    position: fixed; bottom: 128px; right: 32px;
     width: 52px; height: 52px; border-radius: 16px;
     background: #25d366; color: white;
     display: flex; align-items: center; justify-content: center;
@@ -1893,6 +1906,12 @@ h1, h2, h3, h4 {
     box-shadow: 0 4px 18px rgba(37,211,102,0.5);
     transition: all 0.3s ease;
     animation: wa-pulse 2.5s ease-in-out infinite;
+}
+
+.whatsapp-fab.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
 }
 @keyframes wa-pulse {
     0%,100% { box-shadow: 0 4px 18px rgba(37,211,102,0.5), 0 0 0 0 rgba(37,211,102,0.3); }
@@ -1908,6 +1927,262 @@ h1, h2, h3, h4 {
 .whatsapp-tooltip::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-right: none; border-left-color: #25d366; }
 .whatsapp-fab:hover .whatsapp-tooltip { opacity: 1; }
 
-/* Visitor counter */
-.visitor-counter { margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 0.4rem; }
-.visitor-counter i { color: var(--accent); }
+
+/* ================================
+   LANGUAGE TOGGLE
+   ================================ */
+.lang-toggle {
+    display: flex;
+    gap: 2px;
+    background: rgba(6,182,212,0.1);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 3px;
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: var(--transition);
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+}
+
+.lang-btn:hover { color: var(--text); }
+
+.lang-btn.active {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 2px 8px rgba(6,182,212,0.4);
+}
+
+/* ================================
+   EASTER EGG SNAKE GAME
+   ================================ */
+.egg-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.egg-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.egg-box {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 420px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(6,182,212,0.15);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.egg-overlay.open .egg-box {
+    transform: scale(1) translateY(0);
+}
+
+.egg-header {
+    background: #161b22;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #30363d;
+}
+
+.egg-dots {
+    display: flex;
+    gap: 5px;
+}
+
+.egg-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.egg-dots span:nth-child(1) { background: #ff5f57; }
+.egg-dots span:nth-child(2) { background: #febc2e; }
+.egg-dots span:nth-child(3) { background: #28c840; }
+
+.egg-title {
+    flex: 1;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: #8b949e;
+}
+
+.egg-close {
+    background: none;
+    border: none;
+    color: #8b949e;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: color 0.2s;
+}
+
+.egg-close:hover { color: #f0f6fc; }
+
+.egg-hint {
+    padding: 8px 14px;
+    font-size: 0.78rem;
+    color: #06b6d4;
+    font-family: 'Courier New', monospace;
+    background: rgba(6,182,212,0.05);
+    border-bottom: 1px solid #30363d;
+}
+
+#snakeCanvas {
+    display: block;
+    background: #010409;
+    width: 100%;
+    height: auto;
+}
+
+.egg-score-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: #161b22;
+    border-top: 1px solid #30363d;
+    font-family: 'Courier New', monospace;
+    font-size: 0.82rem;
+    color: #8b949e;
+}
+
+.egg-score-row strong { color: #06b6d4; }
+
+.egg-restart {
+    background: rgba(6,182,212,0.15);
+    border: 1px solid #06b6d4;
+    color: #06b6d4;
+    padding: 4px 14px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    transition: all 0.2s;
+}
+
+.egg-restart:hover { background: rgba(6,182,212,0.3); }
+
+/* Language transition */
+[data-i18n] { transition: opacity 0.2s ease; }
+.lang-switching [data-i18n] { opacity: 0; }
+
+/* ================================
+   LIVE CLOCK & AVAILABILITY BADGE
+   ================================ */
+.live-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0 1.5rem;
+    flex-wrap: wrap;
+}
+
+.availability-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border: 1px solid;
+    transition: var(--transition);
+}
+
+.availability-badge.available {
+    background: rgba(16,185,129,0.12);
+    border-color: rgba(16,185,129,0.4);
+    color: #10b981;
+}
+
+.availability-badge.away {
+    background: rgba(245,158,11,0.12);
+    border-color: rgba(245,158,11,0.4);
+    color: #f59e0b;
+}
+
+.avail-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.availability-badge.available .avail-dot {
+    background: #10b981;
+    box-shadow: 0 0 0 0 rgba(16,185,129,0.4);
+    animation: avail-pulse 2s infinite;
+}
+
+.availability-badge.away .avail-dot {
+    background: #f59e0b;
+}
+
+@keyframes avail-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+    70%  { box-shadow: 0 0 0 7px rgba(16,185,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+}
+
+.live-clock {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.9rem;
+    background: rgba(6,182,212,0.08);
+    border: 1px solid rgba(6,182,212,0.2);
+    border-radius: 30px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-family: 'Courier New', monospace;
+}
+
+.live-clock i {
+    color: var(--accent);
+    font-size: 0.78rem;
+}
+
+.clock-tz {
+    font-size: 0.7rem;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 540px) {
+    .live-badge-row {
+        gap: 0.6rem;
+        margin: 0.75rem 0 1.25rem;
+    }
+    .availability-badge,
+    .live-clock {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.75rem;
+    }
+}
