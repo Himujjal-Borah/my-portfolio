@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
     <title>Himujjal Borah | Software Developer</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="Mobile.css">
+    <link rel="stylesheet" href="mobile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -40,12 +40,14 @@
                 <a href="#experience" class="nav-link" >Experience</a>
                 <a href="#contact" class="nav-link" >Contact</a>
             </div>
-            <button class="nav-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
-<button class="theme-toggle">
-                <i class="fas fa-moon"></i>
-            </button>
+            <div class="nav-actions">
+                <button class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -592,7 +594,7 @@
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">Get In <span class="text-gradient">Touch</span></h2>
-            <div class="contact-container">
+            <div class="contact-container contact-info-only">
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
@@ -630,19 +632,7 @@
                         </a>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm">
 
-<input type="text" name="name" placeholder="Your Name" required>
-
-<input type="email" name="email" placeholder="Your Email" required>
-
-<input type="text" name="subject" placeholder="Subject" required>
-
-<textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-
-<button type="submit" class="btn-primary">Send Message</button>
-
-</form>
             </div>
         </div>
     </section>
