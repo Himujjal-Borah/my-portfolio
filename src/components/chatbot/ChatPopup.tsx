@@ -3,6 +3,7 @@ import { useChatStore } from '@/store/useChatStore'
 import { getSessionId } from '@/utils/sessionId'
 import { getKeywordResponse, getN8nChatResponse } from '@/services/chatbotApi'
 import { SuggestionChips } from './SuggestionChips'
+import { FormattedText } from './FormattedText'
 
 export function ChatPopup() {
   const { messages, isTyping, showChips, addMessage, setTyping, clearMessages, setShowChips } = useChatStore()
@@ -50,7 +51,9 @@ export function ChatPopup() {
             <div className="bubble-avatar">
               <i className={`fas ${msg.role === 'bot' ? 'fa-robot' : 'fa-user'}`} />
             </div>
-            <div className="bubble-content">{msg.text}</div>
+            <div className="bubble-content">
+              {msg.role === 'bot' ? <FormattedText text={msg.text} /> : msg.text}
+            </div>
           </div>
         ))}
         {isTyping && (

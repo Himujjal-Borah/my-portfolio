@@ -1,6 +1,23 @@
 import type { ExperienceItem, AboutInfo } from '@/types/portfolio'
 
 export const experienceItems: ExperienceItem[] = [
+  // Work Experience
+  {
+    type: 'work',
+    title: 'Software Developer',
+    subtitle: 'Spectrus Sustainable Solutions Pvt Ltd',
+    period: 'Dec 2025 - Present',
+    description:
+      'Software developer building and maintaining software solutions, with a focus on AI-powered automation. I work with databases, n8n, WordPress and Metabase to turn manual processes into reliable, efficient systems with clear data visibility.',
+    icon: 'fas fa-briefcase',
+    highlights: [
+      { label: 'AI-powered automation', text: 'designing workflows that save time and reduce manual effort' },
+      { label: 'n8n', text: 'building and maintaining automation workflows that connect apps, APIs and AI models' },
+      { label: 'WordPress', text: 'developing and customizing websites, themes and plugins' },
+      { label: 'Metabase', text: 'creating dashboards and reports so teams can track metrics and make data-driven decisions' },
+      { label: 'Databases', text: 'designing schemas, writing queries and managing data' },
+    ],
+  },
   // Education
   {
     type: 'education',

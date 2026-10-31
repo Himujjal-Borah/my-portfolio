@@ -3,195 +3,156 @@ import type { BotIntent } from '@/types/chatbot'
 export const BOT_RESPONSES: BotIntent[] = [
   // 1. Greetings
   {
-    keywords: ['hello', 'hi', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening', 'howdy', 'yo'],
+    keywords: ['hello', 'hi', 'hey', 'greetings', 'good morning', 'good afternoon', 'good evening', 'howdy', 'yo', 'namaste', 'sup'],
     responses: [
-      "Hello! 👋 How can I help you learn about Himujjal today?",
-      "Hi there! Feel free to ask about Himujjal's skills, projects, or experience!",
-      "Hey! I'm Himujjal's AI assistant. What would you like to know?",
+      "Hello! 👋 I'm Himujjal's AI assistant.\n\nHere's what you can ask me:\n\n• **Skills & Tools** — frontend, backend, n8n, WordPress\n• **Experience** — work, internships, education\n• **Projects** — AI, automation, full-stack\n• **Contact** — email, socials, CV\n\nWhat would you like to know?",
+      "Hey there! 👋 I can tell you about Himujjal's:\n\n• **Work** at Spectrus Sustainable Solutions\n• **Skills & tools** like n8n and WordPress\n• **Projects** and **education**\n\nJust ask away!",
     ],
   },
-  // 2. About Himujjal
+  // 2. About
   {
     keywords: ['about himujjal', 'who is himujjal', 'tell me about', 'about you', 'who are you', 'introduce', 'introduction', 'background', 'bio', 'profile', 'himujjal borah', 'yourself'],
     responses: [
-      "Himujjal Borah is a Software Developer from Assam, India. He's passionate about full-stack web development and AI automation. He's currently pursuing B.Tech in CSE at Barak Valley Engineering College (2022-2025) and working as a Software Developer at Spectrus Sustainable Solutions.",
-      "Himujjal is a versatile developer skilled in both frontend and backend technologies. He loves building AI-powered applications and automating workflows with n8n. Want to know more about his specific skills or projects?",
+      "**Himujjal Borah** is a Software Developer from Assam, India.\n\n• **Role:** Software Developer @ Spectrus Sustainable Solutions\n• **Focus:** AI-powered automation & full-stack development\n• **Education:** B.Tech CSE, Barak Valley Engineering College\n\nHe builds reliable, efficient systems using **n8n**, **WordPress** and databases.",
     ],
   },
-  // 3. Current job/role
+  // 3. Current role / work
   {
-    keywords: ['current role', 'job', 'work', 'position', 'employment', 'working', 'company', 'spectrus', 'software developer', 'currently do', 'doing now', 'what do you do'],
+    keywords: ['current role', 'job', 'work', 'position', 'employment', 'working', 'company', 'spectrus', 'software developer', 'currently do', 'doing now', 'what do you do', 'where do you work', 'where does he work'],
     responses: [
-      "Himujjal is currently working as a Software Developer at Spectrus Sustainable Solutions (since April 2026). He builds and maintains software solutions while also pursuing his B.Tech degree.",
+      "**Software Developer @ Spectrus Sustainable Solutions Pvt Ltd**\n*(Dec 2025 – Present)*\n\nHe builds and maintains software solutions focused on AI-powered automation:\n\n• **AI automation** — designing time-saving workflows\n• **n8n** — automation connecting apps, APIs & AI models\n• **WordPress** — websites, themes & plugins\n• **Databases** — schemas, queries & data management",
     ],
   },
-  // 4. Education
-  {
-    keywords: ['education', 'study', 'college', 'university', 'degree', 'btech', 'b.tech', 'diploma', 'academic', 'school', 'qualification', 'barak valley', 'nowgong', 'polytechnic', 'cse'],
-    responses: [
-      "Himujjal is pursuing B.Tech in Computer Science & Engineering at Barak Valley Engineering College (2022-2025). He also holds a Diploma in Computer Science from Nowgong Polytechnic (2019-2022).",
-    ],
-  },
-  // 5. Frontend skills
-  {
-    keywords: ['frontend', 'front-end', 'front end', 'html', 'css', 'javascript', 'bootstrap', 'ui', 'ux', 'web design'],
-    responses: [
-      "Himujjal's frontend skills include HTML5 (95%), CSS3 (90%), JavaScript (85%), and Bootstrap (80%). He builds responsive, modern user interfaces with smooth animations and great UX.",
-    ],
-  },
-  // 6. Backend skills
-  {
-    keywords: ['backend', 'back-end', 'back end', 'node', 'express', 'mysql', 'database', 'server', 'api', 'python', 'sql', 'nodejs', 'node.js'],
-    responses: [
-      "On the backend, Himujjal works with Node.js (80%), Express.js (75%), MySQL (75%), and Python (70%). He builds RESTful APIs and full-stack applications.",
-    ],
-  },
-  // 7. Tools
-  {
-    keywords: ['tools', 'n8n', 'metabase', 'automation', 'workflow', 'ai tools', 'technologies', 'tech stack'],
-    responses: [
-      "Himujjal uses a variety of tools including n8n for workflow automation, Metabase for data visualization, Git/GitHub for version control, and various AI tools. He's also experienced with Java and jQuery.",
-    ],
-  },
-  // 8. General skills
+  // 4. Skills
   {
     keywords: ['skills', 'what can you do', 'abilities', 'technologies', 'tech', 'programming', 'coding', 'development', 'stack', 'expertise', 'proficient', 'know'],
     responses: [
-      "Himujjal is skilled in: Frontend (HTML5, CSS3, JavaScript, Bootstrap), Backend (Node.js, Express.js, Python), Database (MySQL), and Tools (n8n, Metabase, Git, AI/ML). He's also experienced with Java and automation workflows. Want details on any specific area?",
+      "**Frontend**\n• HTML5 (95%), CSS3 (90%), JavaScript (85%), Bootstrap (80%)\n\n**Backend & Database**\n• Node.js (80%), MySQL (75%), Express.js (75%), Python (70%)\n\n**Tools**\n• n8n, WordPress, Metabase, Git & GitHub, Java",
     ],
   },
-  // 9. Projects overview
+  // 5. Tools & technologies
   {
-    keywords: ['projects', 'portfolio', 'work samples', 'what have you built', 'applications', 'apps', 'creations', 'build'],
+    keywords: ['tools', 'n8n', 'metabase', 'wordpress', 'automation', 'workflow', 'ai tools', 'tech stack'],
     responses: [
-      "Himujjal has built several projects including an Online Coding Discussion Forum (PHP/MySQL), Chronic Kidney Disease Prediction (ML/Python), Food Delivery Website, Automated Gmail Reply system (n8n), AI ChatBot with RAG (Python/AI), Music Player, Drum Kit, AI Research & Report Generator (n8n), and an AI Resume Analyzer & Job Matcher (Gemini AI). Check out the Projects section for details!",
+      "**Tools & Technologies**\n\n• **n8n** — workflow automation\n• **WordPress** — websites, themes & plugins\n• **Metabase** — data visualization\n• **Git & GitHub** — version control\n• Plus **Java**, **jQuery** and **Bootstrap**",
     ],
   },
-  // 10. Resume Analyzer
+  // 6. Projects overview
   {
-    keywords: ['resume analyzer', 'job matcher'],
+    keywords: ['projects', 'portfolio', 'work samples', 'what have you built', 'applications', 'apps', 'creations', 'build', 'project'],
     responses: [
-      "The AI Resume Analyzer & Job Matcher is one of Himujjal's featured projects. It uses Google Gemini AI to analyze resumes and match them with job descriptions, providing insights on skill gaps and compatibility scores.",
+      "Here are **5 featured projects**:\n\n• **AI-Powered Chatbot** — n8n + Gemini + Pinecone\n• **Automated Email Reply Workflow** — n8n + Gmail\n• **Warehouse Management System** — React + TypeScript + Ant Design\n• **AI Code Review Bot** — React + Node.js + Gemini\n• **Food Delivery Website** — HTML, CSS & JavaScript\n\nAsk me about any of them for details!",
     ],
   },
-  // 11. AI Chatbot / RAG
+  // 7. AI chatbot project
   {
-    keywords: ['chatbot', 'rag', 'ai chat', 'gemini', 'langchain'],
+    keywords: ['ai chatbot', 'rag', 'pinecone', 'vector', 'semantic search', 'gemini'],
     responses: [
-      "Himujjal built an AI ChatBot with RAG (Retrieval-Augmented Generation) using Python and AI technologies. It can answer questions based on provided documents, making it great for knowledge base applications.",
+      "**AI-Powered Chatbot**\n\n• Built with **n8n**, **Google Gemini** & **Pinecone**\n• Documents synced from **Google Drive** into embeddings\n• Semantic search for accurate, intelligent answers",
     ],
   },
-  // 12. Gmail automation
+  // 8. Email automation project
   {
-    keywords: ['gmail', 'email automation', 'automated reply'],
+    keywords: ['gmail', 'email automation', 'automated reply', 'email workflow', 'email response'],
     responses: [
-      "The Automated Gmail Reply system is an n8n workflow that automatically responds to incoming emails based on content analysis. It demonstrates Himujjal's expertise in business process automation.",
+      "**Automated Email Reply Workflow**\n\n• Monitors incoming **Gmail** messages\n• Analyzes content with **AI** and assigns labels\n• Generates structured, professional **HTML replies**",
     ],
   },
-  // 13. Music player
+  // 9. Warehouse project
   {
-    keywords: ['music player', 'audio player'],
+    keywords: ['warehouse', 'inventory', 'wms', 'ant design', 'management system'],
     responses: [
-      "Himujjal built a Music Player web app using HTML, CSS, and JavaScript. It features play/pause, skip, volume control, progress bar, and a playlist interface with a clean modern design.",
+      "**Warehouse Management System**\n\n• Built with **React**, **TypeScript** & **Ant Design**\n• Tracks inventory, orders, suppliers & zones\n• Interactive dashboard + reporting (mock data)",
     ],
   },
-  // 14. Drum kit
+  // 10. Code review project
   {
-    keywords: ['drum kit', 'drum'],
+    keywords: ['code review', 'review bot', 'code quality', 'vulnerabilities', 'performance issues', 'bug'],
     responses: [
-      "The Drum Kit is an interactive web app where you can play drum sounds by clicking buttons or pressing keyboard keys. It's a fun project built with vanilla JavaScript and CSS animations.",
+      "**AI Code Review Bot**\n\n• Built with **React**, **Node.js**, **Express** & **Google Gemini**\n• Reviews JavaScript, Python, Java & C++\n• Flags bugs, security & performance issues",
     ],
   },
-  // 15. Kidney disease / ML
+  // 11. Food delivery project
   {
-    keywords: ['kidney', 'disease', 'machine learning', 'ml', 'prediction', 'health', 'medical'],
+    keywords: ['food delivery', 'food', 'restaurant', 'menu'],
     responses: [
-      "The Chronic Kidney Disease Prediction project uses Machine Learning (Python) to predict the likelihood of kidney disease based on patient data. It demonstrates Himujjal's skills in data science and ML model development.",
+      "**Food Delivery Website**\n\n• Built with **HTML**, **CSS** & **JavaScript**\n• Food categories, menus & responsive UI\n• Clean front-end components",
     ],
   },
-  // 16. Food delivery
+  // 12. Education
   {
-    keywords: ['food delivery', 'food', 'restaurant'],
+    keywords: ['education', 'study', 'college', 'university', 'degree', 'btech', 'b.tech', 'diploma', 'academic', 'school', 'qualification', 'barak valley', 'nowgong', 'polytechnic', 'cse'],
     responses: [
-      "The Food Delivery Website is a frontend project built with HTML, CSS, and JavaScript. It features a modern restaurant-style landing page with menu sections, ordering interface, and responsive design.",
+      "**Education**\n\n• **B.Tech CSE** — Barak Valley Engineering College (2022–2025)\n• **Diploma in CS** — Nowgong Polytechnic (2019–2022)",
     ],
   },
-  // 17. Internship / Experience
+  // 13. Internships / experience
   {
-    keywords: ['internship', 'experience', 'intern', 'work experience', 'training', 'bootcamp', 'udemy', 'pis it'],
+    keywords: ['internship', 'experience', 'intern', 'work experience', 'training', 'bootcamp', 'udemy', 'pis it', 'elite computers'],
     responses: [
-      "Himujjal has completed 3 internships: Full Web Development Bootcamp at Udemy (June-Sept 2023), Web Development Intern at Pis IT Solutions (May 2022), and IT Hardware & Networking Intern at Elite Computers (April 2021). He's now working professionally as a Software Developer.",
+      "**Internships**\n\n• **Full Web Dev Bootcamp** — Udemy (Jun–Sep 2023)\n• **Web Development Intern** — Pis IT Solutions (May 2022)\n• **IT Hardware & Networking Intern** — Elite Computers (Apr 2021)\n\nHe's now working full-time as a **Software Developer**.",
     ],
   },
-  // 18. Certifications
+  // 14. Certifications
   {
     keywords: ['certification', 'certificate', 'course', 'certified'],
     responses: [
-      "Himujjal holds certifications including the Full Web Development Bootcamp from Udemy (2023) and a Web Development Internship certificate from Pis IT Solutions (2022).",
+      "**Certifications**\n\n• Full Web Development Bootcamp — Udemy (2023)\n• Web Development Internship — Pis IT Solutions (2022)",
     ],
   },
-  // 19. Contact / Hire
+  // 15. Contact
   {
     keywords: ['contact', 'hire', 'reach', 'email', 'phone', 'message', 'connect', 'get in touch', 'how to reach', 'how to contact'],
     responses: [
-      "You can contact Himujjal via email at himujjalofficial@gmail.com, on LinkedIn, GitHub, or Twitter. Check the Contact section at the bottom of the page for all his social links!",
+      "You can reach Himujjal via:\n\n• **Email:** himujjalofficial@gmail.com\n• **Phone:** +91 9101300899\n• **Location:** Assam, India\n\nOr use the Contact section at the bottom of the page.",
     ],
   },
-  // 20. Email
+  // 16. Email address
   {
-    keywords: ['email address', 'gmail', 'mail'],
+    keywords: ['email address', 'mail'],
     responses: [
-      "Himujjal's email is himujjalofficial@gmail.com. Feel free to reach out for collaboration, freelance work, or just to say hi!",
+      "📧 **himujjalofficial@gmail.com**\n\nFeel free to reach out for collaboration, freelance work, or just to say hi!",
     ],
   },
-  // 21. GitHub / LinkedIn
+  // 17. Socials
   {
-    keywords: ['github', 'linkedin', 'social', 'profile link', 'code repository', 'repo'],
+    keywords: ['github', 'linkedin', 'social', 'profile link', 'code repository', 'repo', 'twitter', 'codepen'],
     responses: [
-      "You can find Himujjal on GitHub at github.com/Himujjal-Borah and on LinkedIn at linkedin.com/in/himujjal-borah. His GitHub showcases all his projects and contributions!",
+      "**Find Himujjal online**\n\n• **GitHub:** github.com/Himujjal-Borah\n• **LinkedIn:** linkedin.com/in/himujjal-borah\n• **Twitter:** twitter.com/himujjal_borah\n• **CodePen:** codepen.io/himujjal-borah",
     ],
   },
-  // 22. Location
+  // 18. Location
   {
     keywords: ['location', 'where', 'city', 'country', 'state', 'assam', 'india', 'from', 'live', 'based'],
     responses: [
-      "Himujjal is based in Assam, India. He's open to remote opportunities and collaborations regardless of location!",
+      "📍 **Assam, India**\n\nHe's open to remote opportunities and collaborations worldwide.",
     ],
   },
-  // 23. Strengths
-  {
-    keywords: ['strength', 'strengths', 'good at', 'best', 'speciality', 'specialize'],
-    responses: [
-      "Himujjal's key strengths are quick learning, problem-solving, and writing clean maintainable code. He particularly excels at AI automation, full-stack development, and creating intuitive user experiences.",
-    ],
-  },
-  // 24. Hire / opportunity
+  // 19. Hire / opportunity
   {
     keywords: ['hire him', 'job opportunity', 'freelance', 'collaborate', 'work together', 'recruit', 'open position'],
     responses: [
-      "Himujjal is open to exciting opportunities! He's available for freelance work, collaborations, and full-time roles in software development, AI automation, and full-stack engineering. Reach out at himujjalofficial@gmail.com!",
+      "Himujjal is open to exciting opportunities!\n\n• **Freelance** projects\n• **Collaborations**\n• **Full-time roles** in development & automation\n\nReach out at **himujjalofficial@gmail.com**!",
     ],
   },
-  // 25. CV / Resume
+  // 20. CV / Resume
   {
     keywords: ['cv', 'resume', 'download'],
     responses: [
-      "You can download Himujjal's resume/CV by clicking the 'Download CV' button in the hero section. It includes his full education, experience, skills, and project details.",
+      "📄 Download Himujjal's CV using the **Download CV** button in the hero section.\n\nIt covers his education, experience, skills and certifications.",
     ],
   },
-  // 26. Thanks / Goodbye
+  // 21. Thanks / Goodbye
   {
     keywords: ['thanks', 'thank you', 'bye', 'goodbye', 'see you', 'appreciate', 'helpful', 'great', 'awesome'],
     responses: [
-      "You're welcome! 😊 Feel free to come back if you have more questions. Have a great day!",
-      "Happy to help! 💙 Don't forget to check out Himujjal's projects and get in touch if you'd like to connect!",
-      "Anytime! 👋 If you want to know more, try asking about specific projects or skills. Have a wonderful day!",
+      "You're welcome! 😊\n\nFeel free to ask about his **skills**, **experience** or **projects** anytime. Have a great day!",
+      "Happy to help! 💙\n\nDon't hesitate to ask more about **Himujjal's work** or **contact details**. 👋",
     ],
   },
 ]
 
 export const FALLBACK_RESPONSES = [
-  "I'm not sure about that, but you can ask me about Himujjal's skills, projects, education, experience, or how to contact him!",
-  "Hmm, I don't have information on that specific topic. Try asking about Himujjal's projects, skills, or experience instead!",
-  "I'm still learning! For that question, you might want to reach out to Himujjal directly at himujjalofficial@gmail.com.",
+  "I'm not sure about that yet! 🤔\n\nTry asking about:\n\n• **Skills & Tools**\n• **Work Experience**\n• **Projects**\n• **Contact**\n\nOr reach Himujjal directly at **himujjalofficial@gmail.com**.",
+  "Hmm, I don't have that one covered yet.\n\nYou can ask me about Himujjal's **skills**, **projects**, **education** or **experience** instead!",
 ]

@@ -7,17 +7,19 @@ export interface Skill {
 
 export interface Tool {
   name: string
-  icon: string
-  color: string
+  icon?: string
+  color?: string
+  logo?: string
 }
 
 export interface ExperienceItem {
-  type: 'education' | 'internship'
+  type: 'education' | 'internship' | 'work'
   title: string
   subtitle: string
   period: string
   description: string
   icon: string
+  highlights?: { label: string; text: string }[]
 }
 
 export interface Certification {

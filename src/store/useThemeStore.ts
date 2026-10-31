@@ -10,14 +10,14 @@ interface ThemeState {
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
-      theme: 'dark',
+      theme: 'light',
       toggle: () =>
         set((state) => ({
           theme: state.theme === 'dark' ? 'light' : 'dark',
         })),
     }),
     {
-      name: 'portfolio-theme',
+      name: 'portfolio-theme-v2',
     }
   )
 )

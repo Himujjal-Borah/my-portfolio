@@ -79,7 +79,11 @@ export function Skills() {
                 className={`logo-item animate-logo ${isVisible ? 'animated' : ''}`}
                 style={{ transitionDelay: `${i * 50}ms` }}
               >
-                <i className={tool.icon} style={{ color: tool.color }} />
+                {tool.logo ? (
+                  <img className="tool-logo" src={tool.logo} alt={tool.name} />
+                ) : (
+                  <i className={tool.icon} style={{ color: tool.color }} />
+                )}
                 <span>{tool.name}</span>
               </div>
             ))}

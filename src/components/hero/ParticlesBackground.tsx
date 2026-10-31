@@ -18,8 +18,8 @@ export function ParticlesBackground() {
     fpsLimit: 60,
     particles: {
       number: { value: particleCount, density: { enable: true } },
-      color: { value: '#06b6d4' },
-      links: { enable: true, color: '#67e8f9', distance: 150, opacity: 0.3, width: 1 },
+      color: { value: '#6366f1' },
+      links: { enable: true, color: '#a5b4fc', distance: 150, opacity: 0.3, width: 1 },
       move: { enable: true, speed: 2, direction: 'none', random: false, straight: false, outModes: { default: 'bounce' } },
       size: { value: 3 },
       opacity: { value: 0.5 },

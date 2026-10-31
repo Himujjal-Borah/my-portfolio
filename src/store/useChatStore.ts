@@ -21,7 +21,7 @@ export const useChatStore = create<ChatState>()((set) => ({
     {
       id: 'welcome',
       role: 'bot',
-      text: "Hi! 👋 I'm Himujjal's AI assistant. Ask me anything about his skills, projects, experience, or how to get in touch!",
+      text: "Hi! 👋 I'm Himujjal's AI assistant.\n\nHere's what you can ask me:\n\n• **Skills & Tools** — frontend, backend, n8n, WordPress\n• **Experience** — work, internships, education\n• **Projects** — AI, automation, full-stack\n• **Contact** — email, socials, CV",
       timestamp: Date.now(),
     },
   ],
@@ -39,7 +39,7 @@ export const useChatStore = create<ChatState>()((set) => ({
         {
           id: 'welcome-reset',
           role: 'bot',
-          text: "Hi! 👋 I'm Himujjal's AI assistant. Ask me anything about his skills, projects, experience, or how to get in touch!",
+          text: "Hi! 👋 I'm Himujjal's AI assistant.\n\nHere's what you can ask me:\n\n• **Skills & Tools** — frontend, backend, n8n, WordPress\n• **Experience** — work, internships, education\n• **Projects** — AI, automation, full-stack\n• **Contact** — email, socials, CV",
           timestamp: Date.now(),
         },
       ],

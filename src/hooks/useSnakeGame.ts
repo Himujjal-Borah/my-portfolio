@@ -40,11 +40,11 @@ export function useSnakeGame() {
     if (!ctx) return
 
     const isLight = document.documentElement.classList.contains('light')
-    const bg = isLight ? '#e2e8f0' : '#091318'
-    const gridDot = isLight ? '#cbd5e1' : '#1a2a35'
-    const snakeHead = '#06b6d4'
-    const snakeBody = '#0891b2'
-    const foodColor = '#67e8f9'
+    const bg = isLight ? '#eceef2' : '#0f131c'
+    const gridDot = isLight ? '#cbd5e1' : '#1c2331'
+    const snakeHead = '#6366f1'
+    const snakeBody = '#4f46e5'
+    const foodColor = '#a5b4fc'
 
     // Background
     ctx.fillStyle = bg
@@ -73,7 +73,7 @@ export function useSnakeGame() {
     // Snake head glow
     const head = snake[0]
     ctx.shadowBlur = 12
-    ctx.shadowColor = '#06b6d4'
+    ctx.shadowColor = '#6366f1'
     ctx.fillStyle = snakeHead
     ctx.fillRect(head.x * GRID_SIZE + 1, head.y * GRID_SIZE + 1, GRID_SIZE - 2, GRID_SIZE - 2)
     ctx.shadowBlur = 0
@@ -101,7 +101,7 @@ export function useSnakeGame() {
       ctx.font = 'bold 28px Montserrat, sans-serif'
       ctx.textAlign = 'center'
       ctx.fillText('GAME OVER', CANVAS_W / 2, CANVAS_H / 2 - 10)
-      ctx.fillStyle = '#67e8f9'
+      ctx.fillStyle = '#a5b4fc'
       ctx.font = '16px Poppins, sans-serif'
       ctx.fillText(`Score: ${state.score}`, CANVAS_W / 2, CANVAS_H / 2 + 25)
     }

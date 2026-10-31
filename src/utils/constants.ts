@@ -2,11 +2,6 @@
 export const N8N_BASE_URL = import.meta.env.VITE_N8N_BASE_URL || 'https://your-n8n-instance.com'
 
 export const N8N_WEBHOOKS = {
-  projectSubmit: `${N8N_BASE_URL}/webhook/project-submit`,
-  projectList: `${N8N_BASE_URL}/webhook/project-list`,
-  likeSubmit: `${N8N_BASE_URL}/webhook/like`,
-  commentSubmit: `${N8N_BASE_URL}/webhook/comment`,
-  likesAndComments: `${N8N_BASE_URL}/webhook/likes-comments`,
   chatbot: `${N8N_BASE_URL}/webhook/chatbot`,
   contactForm: `${N8N_BASE_URL}/webhook/contact-me`,
 } as const
